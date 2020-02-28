@@ -38,6 +38,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'wheaties',
       style: optionStyle,
     ),
+    Text(
+      'idk',
+      style: optionStyle,
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -50,12 +54,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('BottomNavigationBar Sample'),
+        centerTitle: true,
+        backgroundColor: Colors.grey[350],
+        title: const Text('BOBA TOUCH',
+          style: TextStyle(
+              fontFamily: 'Sunset Boulevard',
+              color:Colors.black,
+            fontSize: 40,
+          ),
+        ),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.grey[350],
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -63,15 +77,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_cafe),
-            title: Text('Menu'),
+            title: Text('Orders'),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.payment),
-            title: Text('Order'),
+            icon: Icon(Icons.redeem),
+            title: Text('Rewards'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.more_horiz),
+            title: Text('More'),
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.lightBlue[200],
+        selectedItemColor: Colors.blue,
         onTap: _onItemTapped,
       ),
     );
