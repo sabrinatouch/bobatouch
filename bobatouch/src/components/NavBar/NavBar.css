@@ -1,0 +1,11 @@
+nav {
+    background-color: transparent !important;
+}
+
+.brand-logo {
+}
+
+.nav-wrapper a{
+    color: #aaa !important;
+    display: flex;
+}
