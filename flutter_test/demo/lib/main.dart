@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'HomePage.dart';
+import 'OrdersPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,10 +29,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
-    Text(
-      'on my',
-      style: optionStyle,
-    ),
+    OrdersPage(),
     Text(
       'wheaties',
       style: optionStyle,
