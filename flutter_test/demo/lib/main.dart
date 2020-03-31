@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'HomePage.dart';
 import 'OrdersPage.dart';
+import 'Rewards.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -30,10 +32,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   static List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     OrdersPage(),
-    Text(
-      'wheaties',
-      style: optionStyle,
-    ),
+    Rewards(),
     Text(
       'idk',
       style: optionStyle,
@@ -59,6 +58,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             fontSize: 40,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            color: Colors.black,
+            onPressed: () {},
+          )
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

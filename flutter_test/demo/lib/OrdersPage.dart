@@ -4,162 +4,102 @@ class OrdersPage extends StatefulWidget {
   @override
   _OrdersPageState createState() => _OrdersPageState();
 }
+class Drink {
+  Drink({this.name, this.pic, this.des});
+  final String name;
+  final String pic;
+  final String des;
+}
+
+class DrinkListTile extends Card {
+  DrinkListTile(Drink drink)
+      : super(
+      child: ListTile(
+        title: Text(drink.name),
+        subtitle: Text(drink.des),
+        leading: CircleAvatar(backgroundImage: AssetImage(drink.pic),)
+      )
+  );
+}
 
 class _OrdersPageState extends State<OrdersPage> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: CustomScrollView(
-        primary: false,
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text('Milk Tea',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.black,
-                )
-            ),
-            backgroundColor: Colors.white,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                _buildMenuItem('assets/drink1.jpg', 'Earl Grey Milk Tea'),
-                _buildMenuItem('assets/drink2.jpg', 'Assam Milk Tea'),
-                _buildMenuItem('assets/drink3.jpg', 'Thai Milk Tea'),
-                _buildMenuItem('assets/drink1.jpg', 'Coconut Milk Tea'),
-                _buildMenuItem('assets/drink2.jpg', 'Match Milk Tea'),
-              ],
-            ),
-          ),
-          SliverAppBar(
-            title: Text('Coffee',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.black,
-                )
-            ),
-            backgroundColor: Colors.white,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                _buildMenuItem('assets/drink1.jpg', 'Cold Brew Hazelnut Vietnamese Coffee'),
-              ],
-            ),
-          ),
-          SliverAppBar(
-            title: Text('Fruity',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.black,
-                )
-            ),
-            backgroundColor: Colors.white,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                _buildMenuItem('assets/drink1.jpg', 'Hibiscus'),
-                _buildMenuItem('assets/drink2.jpg', 'Lemon Grass'),
-                _buildMenuItem('assets/drink3.jpg', 'Giner'),
-                _buildMenuItem('assets/drink1.jpg', 'Lemonade'),
-              ],
-            ),
-          ),
-          SliverAppBar(
-            title: Text('Flavored Milk',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.black,
-                )
-            ),
-            backgroundColor: Colors.white,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                _buildMenuItem('assets/drink1.jpg', 'Strawberry Milk'),
-                _buildMenuItem('assets/drink2.jpg', 'Ube Milk'),
-                _buildMenuItem('assets/drink3.jpg', 'Mung Bean Pandan Milk'),
-              ],
-            ),
-          ),
-          SliverAppBar(
-            title: Text('Ice Cream',
-                style: TextStyle(
-                  fontSize: 30.0,
-                  color: Colors.black,
-                )
-            ),
-            backgroundColor: Colors.white,
-          ),
-          SliverPadding(
-            padding: const EdgeInsets.all(20),
-            sliver: SliverGrid.count(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              crossAxisCount: 2,
-              children: <Widget>[
-                _buildMenuItem('assets/drink1.jpg', 'Brown Sugar Milk Tea'),
-                _buildMenuItem('assets/drink2.jpg', 'Thai Iced Tea'),
-                _buildMenuItem('assets/drink3.jpg', 'Matcha Milk Tea'),
-              ],
-            ),
-          ),
-        ],
-      )
+      body: Container(
+          child: Stack(
+            children: <Widget>[
+              _buildContent(allDrinks),
+//            _buildContent(milkTea),
+//            _buildContent(coffee),
+//            _buildContent(fruity),
+//            _buildContent(flavoredMilk),
+//            _buildContent(iceCream),
+            ],
+          )
+      ),
+    );
+  }
+  Widget _buildContent(list) {
+    return new ListView.separated(
+      itemCount: list.length,
+      itemBuilder: (BuildContext content, int index) {
+        Drink drink = list[index];
+        return DrinkListTile(drink);
+      },
+      separatorBuilder: (context, index){
+        return Divider();
+      },
     );
   }
 }
 
-_buildMenuItem(String imgPath, String name) {
-  return Container(
-      padding: const EdgeInsets.all(8),
-      child: Stack(
-        children: <Widget>[
-          // Stroked text as border.
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 20,
-              foreground: Paint()
-                ..style = PaintingStyle.stroke
-                ..strokeWidth = 3
-                ..color = Colors.black,
-            ),
-          ),
-          // Solid text as fill.
-          Text(
-            name,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.white,
-            ),
-          ),
-        ],
-      ),
-      decoration: new BoxDecoration(
-        image: new DecorationImage(
-          image: ExactAssetImage(imgPath),
-          fit: BoxFit.cover,
-        ),
-      )
-  );
-}
+List<Drink> allDrinks = [
+  Drink(name: 'Earl Grey Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Assam Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Thai Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Coconut Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Match Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Vietnamese Coffee', pic: 'assets/drink1.jpg', des: 'Cold Brew Hazelnut'),
+  Drink(name: 'Hibiscus', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Lemon Grass', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Ginger', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Lemonade', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Stawberry Milk', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Ube Milk', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Mung Bean Pandan Milk', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+];
+
+List<Drink> milkTea = [
+  Drink(name: 'Earl Grey Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Assam Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Thai Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Coconut Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Match Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+];
+
+List<Drink> coffee = [
+  Drink(name: 'Vietnamese Coffee', pic: 'assets/drink1.jpg', des: 'Cold Brew Hazelnut'),
+];
+
+List<Drink> fruity = [
+  Drink(name: 'Hibiscus', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Lemon Grass', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Ginger', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Lemonade', pic: 'assets/drink1.jpg', des: ' '),
+];
+
+List<Drink> flavoredMilk = [
+  Drink(name: 'Stawberry Milk', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Ube Milk', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Mung Bean Pandan Milk', pic: 'assets/drink1.jpg', des: ' '),
+];
+
+List<Drink> iceCream = [
+  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+];
