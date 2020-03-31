@@ -53,7 +53,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 10.0),
             child: Container(
-              height: MediaQuery.of(context).size.height - 350.0,
+              height: 350.0,
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
