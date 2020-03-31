@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class Rewards extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _RewardsState extends State<Rewards> {
           Padding(
             padding: EdgeInsets.all(30.0),
             child: Text(
-              'FEATURED',
+              'REWARDS',
               style: TextStyle(
                 fontSize: 25.0,
                 fontWeight: FontWeight.bold,
@@ -22,51 +23,75 @@ class _RewardsState extends State<Rewards> {
               )
             )
           ),
+          new CircularPercentIndicator(
+            radius: 300.0,
+            lineWidth: 15.0,
+            percent: 0.73,
+            center: new Icon(
+              Icons.local_cafe,
+              size: 110.0,
+              color: Colors.grey,
+              ),
+            progressColor: Colors.cyan,
+            backgroundColor: Colors.blueGrey,
+          ),
           Padding(
-            padding: EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0),
-            child: Container(
-              height: 140.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  _buildFeaturedItem('assets/drink1.jpg', 'Earl Grey Tea'),
-                  _buildFeaturedItem('assets/drink2.jpg', 'Assam Tea'),
-                  _buildFeaturedItem('assets/drink3.jpg', 'Thai Tea'),
-                  _buildFeaturedItem('assets/drink1.jpg', 'Coconut'),
-                  _buildFeaturedItem('assets/drink2.jpg', 'Matcha'),
-                  _buildFeaturedItem('assets/drink3.jpg', 'Strawberry Milk'),
-                ],
+            padding: EdgeInsets.all(20.0),
+            child: Text(
+              'Purchases until next reward:',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               )
             )
           ),
           Padding(
-            padding: EdgeInsets.all(30.0),
-              child: Text(
-                  'WHAT\'S NEW',
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight:FontWeight.bold,
-                    color: Colors.black,
-                  )
-              )
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 15.0, top: 15.0, bottom: 10.0),
-            child: Container(
-              height: MediaQuery.of(context).size.height - 350.0,
-              child: ListView(
-                scrollDirection: Axis.horizontal,
-                children: <Widget>[
-                  _buildWhatsNewItem('assets/drink1.jpg', 'Earl Grey Tea', 'Milk Tea'),
-                  _buildWhatsNewItem('assets/drink2.jpg', 'Assam Tea', 'Milk Tea'),
-                  _buildWhatsNewItem('assets/drink3.jpg', 'Brown Sugar Milk Tea Boba', 'Ice Cream'),
-                  _buildWhatsNewItem('assets/drink1.jpg', 'Thai Tea', 'Milk Tea')
-                ],
+            padding: EdgeInsets.all(0.0),
+            child: Text(
+              '5',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 50.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               )
             )
+          ),
+          Padding( 
+            padding: EdgeInsets.only(
+              left: 100, 
+              right: 100, 
+              top: 10, 
+              bottom: 10
+              ),
+            child: InkWell( 
+              onTap: () {},
+              child: Container( 
+                height: 50.0,
+                width: 100.0,
+                decoration: BoxDecoration( 
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.cyan,
+
+                ),
+                child: Center(
+                  child: Text( 
+                    "Redeem",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                      
+                    ),
+                  ),
+                ),
+              ),
+            ),
           )
         ],
-      )
+      ),
     );
   }
 }

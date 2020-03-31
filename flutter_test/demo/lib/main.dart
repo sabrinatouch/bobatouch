@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'HomePage.dart';
+import 'Rewards.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,10 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'on my',
       style: optionStyle,
     ),
-    Text(
-      'wheaties',
-      style: optionStyle,
-    ),
+    Rewards(),
     Text(
       'idk',
       style: optionStyle,
