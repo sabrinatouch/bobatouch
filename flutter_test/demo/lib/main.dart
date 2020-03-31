@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'HomePage.dart';
+import 'Rewards.dart';
 
 void main() => runApp(MyApp());
 
@@ -32,10 +33,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       'on my',
       style: optionStyle,
     ),
-    Text(
-      'wheaties',
-      style: optionStyle,
-    ),
+    Rewards(),
     Text(
       'idk',
       style: optionStyle,
@@ -61,6 +59,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             fontSize: 40,
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            color: Colors.black,
+            onPressed: () {},
+          )
+        ],
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
