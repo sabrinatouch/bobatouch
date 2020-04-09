@@ -3,6 +3,7 @@ import 'HomePage.dart';
 import 'OrdersPage.dart';
 import 'Rewards.dart';
 import 'More.dart';
+import 'Cart.dart';
 
 
 void main() => runApp(MyApp());
@@ -34,7 +35,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     HomePage(),
     OrdersPage(),
     Rewards(),
-    More(),
+    More()
   ];
 
   void _onItemTapped(int index) {
@@ -60,7 +61,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           IconButton(
             icon: Icon(Icons.shopping_cart),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) =>
+              Cart()));
+            },
           )
         ],
       ),
