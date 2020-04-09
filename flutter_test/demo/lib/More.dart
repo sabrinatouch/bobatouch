@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'MyAccount.dart';
 
 class More extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class _MoreState extends State<More> {
     return new Scaffold(
       body: ListView(
         children: <Widget>[
-          Padding(
+          Padding( // HEADER
             padding: EdgeInsets.all(30.0),
             child: Text(
               'MORE',
@@ -22,7 +23,7 @@ class _MoreState extends State<More> {
               )
             )
           ),
-          Padding(
+          Padding( // IMAGE
             padding: EdgeInsets.only(
               left: 100,
               right: 100,
@@ -41,7 +42,7 @@ class _MoreState extends State<More> {
               )
             )
           ),
-          Padding(
+          Padding( // "MY ACCOUNT" BUTTON
             padding: EdgeInsets.only(
               left: 100,
               right: 100,
@@ -49,7 +50,12 @@ class _MoreState extends State<More> {
               bottom: 10
               ),
             child: InkWell(
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) =>
+                  MyAccount()));
+              },
               child: Container(
                 height: 50.0,
                 width: 100.0,
@@ -58,8 +64,7 @@ class _MoreState extends State<More> {
                   color: Colors.cyan,
                 ),
                 child: Center(
-                  child: Text(
-                    "My Account",
+                  child: Text("My Account",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
