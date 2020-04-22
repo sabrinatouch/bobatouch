@@ -4,35 +4,74 @@ import 'package:square_in_app_payments/models.dart';
 import 'package:square_in_app_payments/in_app_payments.dart';
 import 'dart:io' show Platform; // To identify platform for Square UI
 
+import 'main.dart';
+//import 'package:http/http.dart';
+
 class Cart extends StatefulWidget {
   @override
   _CartState createState() => _CartState();
 }
 
 class _CartState extends State<Cart> {
-  void _pay() {
-    InAppPayments.setSquareApplicationId('sq0idp-3UgsCk2UMvaIAsR4EVWr1g');
-    InAppPayments.startCardEntryFlow(
-      onCardNonceRequestSuccess: _cardNonceRequestSuccess, // Successfully entered card or
-      onCardEntryCancel: _cardEntryCancel // Basically saying that user has canceled payment
-    );
+  void _pay() async {
+    try {
+      await InAppPayments.setSquareApplicationId('sq0idp-3UgsCk2UMvaIAsR4EVWr1g');
+      for( var i = 1 ; i <= 4; i++ ) {
+        Future.delayed(Duration(seconds: i), () => print(i));
+      }
+      await InAppPayments.startCardEntryFlow(
+          onCardNonceRequestSuccess: _cardNonceRequestSuccess,
+          // Successfully entered card or
+          onCardEntryCancel: _cardEntryCancel // Basically saying that user has canceled payment
+
+      );
+    } catch (ex){
+      InAppPayments.showCardNonceProcessingError(ex.toString());
+    }
   }
+
+//  Future<http.Response> sendNonce(String nonce) {
+//    return http.post(
+//      'https://square-test-42.herokuapp.com/chargeForCookie',
+//      headers: <String, String>{
+//        'Content-Type': 'application/json; charset=UTF-8',
+//      },
+//      body: jsonEncode(<String, String>{
+//        'nonce': nonce,
+//      }),
+//    );
+//  }
 
   void _cardEntryCancel() {
     // Canceled card entry
+    MyStatefulWidget();
   }
 
   // This function will return card details
-  void _cardNonceRequestSuccess(CardDetails result) { 
-    print(result.nonce);
+  void _cardNonceRequestSuccess(CardDetails result) {
+    //print(sendNonce(result.nonce));
+    try {
+      // take payment with the card nonce details
+      // you can take a charge
+      // await chargeCard(result);
 
-    InAppPayments.completeCardEntry(
-      onCardEntryComplete: _cardEntryComplete,
-    );
+      // payment finished successfully
+      // you must call this method to close card entry
+      for( var i = 5; i <= 8; i++ ) {
+        Future.delayed(Duration(seconds: i), () => print(i));
+      }
+      InAppPayments.completeCardEntry(
+          onCardEntryComplete: _onCardEntryComplete);
+    } catch (ex) {
+      // payment failed to complete due to error
+      // notify card entry to show processing error
+      InAppPayments.showCardNonceProcessingError(ex.toString());
+    }
   }
 
-  void _cardEntryComplete() {
+  void _onCardEntryComplete() {
     // Success
+    MyStatefulWidget();
   }
 
   @override
