@@ -15,9 +15,17 @@ class DrinkListTile extends Card {
   DrinkListTile(Drink drink)
       : super(
       child: ListTile(
-        title: Text(drink.name),
+        title: Text(drink.name,
+          style: TextStyle(
+            fontSize: 25,
+            color: Colors.black,
+          ),
+        ),
         subtitle: Text(drink.des),
-        leading: CircleAvatar(backgroundImage: AssetImage(drink.pic),)
+        leading: CircleAvatar(
+          backgroundImage: AssetImage(drink.pic),
+          maxRadius: 28,
+        )
       )
   );
 }
@@ -68,9 +76,9 @@ List<Drink> allDrinks = [
   Drink(name: 'Stawberry Milk', pic: 'assets/drink1.jpg', des: ' '),
   Drink(name: 'Ube Milk', pic: 'assets/drink1.jpg', des: ' '),
   Drink(name: 'Mung Bean Pandan Milk', pic: 'assets/drink1.jpg', des: ' '),
-  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
-  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: ' '),
-  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
+  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
+  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
 ];
 
 List<Drink> milkTea = [
@@ -99,7 +107,7 @@ List<Drink> flavoredMilk = [
 ];
 
 List<Drink> iceCream = [
-  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
-  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: ' '),
-  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: ' '),
+  Drink(name: 'Brown Sugar Milk Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
+  Drink(name: 'Thai Iced Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
+  Drink(name: 'Matcha Milk Tea', pic: 'assets/drink1.jpg', des: 'Ice Cream'),
 ];
