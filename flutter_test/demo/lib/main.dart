@@ -3,6 +3,8 @@ import 'HomePage.dart';
 import 'OrdersPage.dart';
 import 'Rewards.dart';
 import 'More.dart';
+import 'Cart.dart';
+
 
 
 void main() => runApp(MyApp());
@@ -15,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -34,7 +37,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     HomePage(),
     OrdersPage(),
     Rewards(),
-    More(),
+    More()
   ];
 
   void _onItemTapped(int index) {
@@ -57,11 +60,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            color: Colors.black,
-            onPressed: () {},
-          )
+          // IconButton(
+          //   icon: Icon(Icons.shopping_cart),
+          //   color: Colors.black,
+          //   onPressed: () {
+          //     Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) =>
+          //     Cart()));
+          //   },
+          // )
         ],
       ),
       body: Center(

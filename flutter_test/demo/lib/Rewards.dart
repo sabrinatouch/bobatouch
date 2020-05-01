@@ -24,7 +24,7 @@ class _RewardsState extends State<Rewards> {
             )
           ),
           new CircularPercentIndicator(
-            radius: 300.0,
+            radius: 200.0,
             lineWidth: 15.0,
             percent: 0.73,
             center: new Icon(
@@ -32,7 +32,7 @@ class _RewardsState extends State<Rewards> {
               size: 110.0,
               color: Colors.grey,
               ),
-            progressColor: Colors.cyan,
+            progressColor: Colors.blue,
             backgroundColor: Colors.blueGrey,
           ),
           Padding(
@@ -73,8 +73,7 @@ class _RewardsState extends State<Rewards> {
                 width: 100.0,
                 decoration: BoxDecoration( 
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.cyan,
-
+                  color: Colors.blue,
                 ),
                 child: Center(
                   child: Text( 
@@ -82,8 +81,7 @@ class _RewardsState extends State<Rewards> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      
+                      color: Colors.white,
                     ),
                   ),
                 ),
