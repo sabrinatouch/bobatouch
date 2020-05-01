@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: MyStatefulWidget(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
@@ -58,16 +59,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           ),
         ),
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            color: Colors.black,
-            onPressed: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) =>
-              Cart()));
-            },
-          )
+          // IconButton(
+          //   icon: Icon(Icons.shopping_cart),
+          //   color: Colors.black,
+          //   onPressed: () {
+          //     Navigator.push(
+          //     context,
+          //     MaterialPageRoute(builder: (context) =>
+          //     Cart()));
+          //   },
+          // )
         ],
       ),
       body: Center(

@@ -61,14 +61,14 @@ class _MoreState extends State<More> {
                 width: 100.0,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.cyan,
+                  color: Colors.blue,
                 ),
                 child: Center(
                   child: Text("My Account",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   ),
                 ),

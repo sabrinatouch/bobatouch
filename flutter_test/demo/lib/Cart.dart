@@ -1,110 +1,118 @@
-import 'package:flutter/material.dart';
-
 import 'package:square_in_app_payments/models.dart';
 import 'package:square_in_app_payments/in_app_payments.dart';
 import 'dart:io' show Platform; // To identify platform for Square UI
 
+import 'drink_object.dart';
+
+import 'package:flutter/material.dart'; 
+import 'package:flutter/material.dart' as flutter; // To specify using 'Card' since it is also exists in the Square library
+
 class Cart extends StatefulWidget {
+  final List<Drink> _cart;
+
+  Cart(this._cart);
+
   @override
-  _CartState createState() => _CartState();
+  _CartState createState() => _CartState(this._cart);
 }
 
 class _CartState extends State<Cart> {
-  void _pay() {
-    InAppPayments.setSquareApplicationId('sq0idp-3UgsCk2UMvaIAsR4EVWr1g');
-    InAppPayments.startCardEntryFlow(
-      onCardNonceRequestSuccess: _cardNonceRequestSuccess, // Successfully entered card or
-      onCardEntryCancel: _cardEntryCancel // Basically saying that user has canceled payment
-    );
-  }
+  _CartState(this._cart);
 
-  void _cardEntryCancel() {
-    // Canceled card entry
-  }
-
-  // This function will return card details
-  void _cardNonceRequestSuccess(CardDetails result) { 
-    print(result.nonce);
-
-    InAppPayments.completeCardEntry(
-      onCardEntryComplete: _cardEntryComplete,
-    );
-  }
-
-  void _cardEntryComplete() {
-    // Success
-  }
+  List<Drink> _cart;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: Colors.grey[350],
-        title: const Text('BOBA TOUCH',
-          style: TextStyle(
-              fontFamily: 'Sunset Boulevard',
-              color:Colors.black,
-            fontSize: 40,
-          ),
-        ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            color: Colors.blue,
-            onPressed: () {},
-          )
-        ],
+        title: Text('Cart'),
       ),
-      body: ListView(
-        children: <Widget>[
-          Padding( // HEADER
-            padding: EdgeInsets.all(30.0),
-            child: Text(
-              'CART',
-              style: TextStyle(
-                fontSize: 25.0,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              )
-            )
-          ),
-          Padding( // "CHECKOUT" BUTTON
-            padding: EdgeInsets.only(
-              left: 100,
-              right: 100,
-              top: 10,
-              bottom: 10
-              ),
-            child: InkWell(
-              onTap: _pay,
-              // onTap: () { // For second navigation
-              //   Navigator.push(
-              //     context,
-              //     MaterialPageRoute(builder: (context) =>
-              //     Checkout()));
-              // },
-              child: Container(
-                height: 50.0,
-                width: 100.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  color: Colors.cyan,
+      body: ListView.builder(
+          itemCount: _cart.length,
+          itemBuilder: (context, index) {
+            var item = _cart[index];
+            return Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 2.0),
+              child: flutter.Card(
+                elevation: 4.0,
+                child: ListTile(
+                  leading: CircleAvatar(backgroundImage: AssetImage(item.pic)),
+                  title: Text(item.name),
+                  trailing: GestureDetector(
+                      child: Icon(
+                        Icons.remove_circle,
+                        color: Colors.red,
+                      ),
+                      onTap: () {
+                        setState(() {
+                          _cart.remove(item);
+                        });
+                      }),
                 ),
-                child: Center(
-                  child: Text("Checkout",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+              ),
+            );
+          }),
+      floatingActionButton: 
+        Padding ( // "CHECKOUT" BUTTON
+          padding: EdgeInsets.only(
+            top: 20,
+            bottom: 20,
+            left: 110,
+            right: 110,
+          ),
+          child: InkWell(
+            onTap: _pay,
+            child: Container(
+              height: 50.0,
+              width: 120.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15.0),
+                color: Colors.blue,
+              ),
+              child: Center(
+                child: Text("Checkout",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ),
             ),
-          )
-        ],
-      ),
+          ),
+        )
     );
   }
+}
+
+_pay() async {
+  // Sets Square Application ID (from Square dashboard)
+  await InAppPayments.setSquareApplicationId('sq0idp-3UgsCk2UMvaIAsR4EVWr1g');
+  await InAppPayments.startCardEntryFlow(
+
+      onCardNonceRequestSuccess: _onCardNonceRequestSuccess, // Successfully entered card or
+      onCardEntryCancel: _onCardEntryCancel // Basically saying that user has canceled payment
+    );
+}
+
+void _onCardEntryCancel() {
+  // Canceled card entry
+}
+
+// This function will return card details
+void _onCardNonceRequestSuccess(CardDetails result) { 
+  try {
+    print('SUCCESS!');
+    InAppPayments.completeCardEntry(
+      onCardEntryComplete: () => print('yay'));
+  } catch (error) {
+    print('There are problems');
+    InAppPayments.showCardNonceProcessingError(error.message);
+  }
+}
+
+// Closes card entry form on success
+void _onCardEntryComplete() {
+  // Success
 }
